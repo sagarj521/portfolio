@@ -1,0 +1,36 @@
+.projectList{
+    padding: 20px;
+    margin: 5px;
+    width: calc(100% - 260px);   
+    text-align: center;
+}
+
+.cart{
+    box-shadow: 0 2px 8px #00000042;
+    display: flex;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+.card_right{
+    padding: 1rem;
+}
+.title{
+    font-weight: bold;
+    font-size: 22px;
+}
+.url{
+    font-size: 15px;
+    font-weight: normal;
+    margin-right: 0px;
+    padding: 5px;
+}
+.tech{
+    border-radius: 4px;
+    padding: .5rem;
+    margin: 1rem .2rem .5rem 0;
+    font-size: .8rem;
+    color: rgb(250, 36, 36);
+    transition: .3s;
+    background-color: rgb(195, 189, 255);
+}

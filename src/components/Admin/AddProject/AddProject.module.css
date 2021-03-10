@@ -1,0 +1,7 @@
+.addProject{
+    width: calc(100% - 260px);
+}
+.head{
+    font-weight: bolder;
+    font-size: 18px;
+}

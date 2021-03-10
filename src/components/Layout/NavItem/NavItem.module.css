@@ -1,0 +1,13 @@
+.navlink{
+    color: #f8f1ea;
+    text-decoration: none;
+    height: 100%;
+    padding: 8px 35px;
+    box-sizing: border-box;
+}
+.navlink:hover{
+    border-color: rgb(0, 0, 0);
+    background-color: rgb(164 107 22);
+    border: 1px solid black;
+    border-radius: 30px;
+}
