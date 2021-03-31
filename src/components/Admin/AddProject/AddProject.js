@@ -12,7 +12,8 @@ import FormSelect from '../../Controls/Select';
 import FormTextArea from '../../Controls/TextArea';
 import { API_END_POINT } from '../../../Constant';
 import axios from 'axios';
- 
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
  const options = [
@@ -35,18 +36,32 @@ import axios from 'axios';
  
  const defaultValues = {
    title: "",
-   technologies: "", 
-   description: ""
+   githubUrl: "", 
+   duration: "",
+   technologies:"",
+   description:""
  };
+
+ /* validations */
+ const validationSchema = yup.object().shape({
+   title: yup.string().required("Title is Required"),
+   githubUrl: yup.string().required("Github URL is Required"),
+   // duration: yup.string().required("Duration is Required"),
+   // technologies: yup.string().required("Technologies is Required"),
+   description: yup.string().min(12).required("Description is Required"),   
+   });
 
 const AddProject = ()=> {
 
    let [projectImage, setProjectImage] = useState();
-   
-   const { register, handleSubmit, control } = useForm({ defaultValues });
-  
+
    const methods = useForm();
    
+   const { handleSubmit, 
+      control, 
+      errors } = useForm({ defaultValues,
+                           resolver: yupResolver(validationSchema) });
+
    const onSubmit = data => {
      
       axios.post(API_END_POINT+'project/createProject', data)
@@ -72,12 +87,37 @@ const AddProject = ()=> {
                <form encType="multipart/form-data">
                   <Grid container spacing={10}>
                      <Grid item xs={5}>
-                        <FormInput name="title" label="Project Title" control={control} />
+                        <FormInput 
+                           variant="outlined" 
+                           fullWidth 
+                           name="title" 
+                           label="Project Title"
+                           required
+                           errorobj={errors} 
+                           control={control} />
                      </Grid>
                   </Grid>
                   <Grid container spacing={10}>
                      <Grid item xs={5}>
-                     Project Duration <FormSelect name="duration" label="Project Duration In Month" control={control} options={projectDuration} />
+                        <FormInput 
+                           variant="outlined" 
+                           fullWidth 
+                           name="githubUrl" 
+                           label="Github URL" 
+                           required
+                           errorobj={errors} 
+                           control={control} />
+                     </Grid>
+                  </Grid>
+                  <Grid container spacing={10}>
+                     <Grid item xs={5}>
+                        <label>Project Duration</label> 
+                     <FormSelect 
+                        name="duration" 
+                        required
+                        errorobj={errors}
+                        control={control} 
+                        options={projectDuration} />
                      </Grid>
                   </Grid>
                   {/* <Grid container spacing={10}>
@@ -88,12 +128,26 @@ const AddProject = ()=> {
                   </Grid> */}
                   <Grid container spacing={10}>
                      <Grid item xs={5}>
-                        Technologies<FormSelect name="technologies" isMulti={true} label="Technologies" control={control} options={options} />
+                        <label>Technologies</label>
+                        <FormSelect  
+                           name="technologies" 
+                           isMulti={true} 
+                           label="Technologies" 
+                           required
+                           errorobj={errors}
+                           control={control} 
+                           options={options} />
                      </Grid>
                   </Grid>
                   <Grid container spacing={10}>
                      <Grid item xs={5}>
-                        <FormTextArea name="description" label="Project Description" control={control} />
+                        <FormTextArea 
+                           variant="outlined" 
+                           name="description" 
+                           label="Project Description" 
+                           required
+                           errorobj={errors}
+                           control={control} />
                      </Grid>
                   </Grid>
       

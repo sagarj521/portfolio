@@ -18,6 +18,9 @@
 .title{
     font-weight: bold;
     font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .url{
     font-size: 15px;
@@ -33,4 +36,8 @@
     color: rgb(250, 36, 36);
     transition: .3s;
     background-color: rgb(195, 189, 255);
+}
+
+.githubIcon{
+    color: #2c2e3e
 }
